@@ -14,6 +14,7 @@ export interface App {
   overview: string
   pros: string[]
   cons: string[]
+  screenshots?: string[]
 }
 
 export interface AppsData {

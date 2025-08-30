@@ -80,3 +80,5 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
     </div>
   )
 }
+
+export { ShaderBackground }

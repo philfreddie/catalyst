@@ -19,6 +19,10 @@ apps:
     url: "https://notion.so"
     description: "All-in-one workspace for notes, docs, and collaboration"
     overview: "Notion combines note-taking, task management, databases, and team collaboration in one powerful platform. Perfect for personal organization or team projects."
+    screenshots:
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
     pros:
       - "Highly customizable workspace"
       - "Great for team collaboration"
@@ -34,6 +38,10 @@ apps:
     url: "https://figma.com"
     description: "Collaborative interface design tool"
     overview: "Figma is the leading collaborative design platform for creating user interfaces, prototypes, and design systems. Works entirely in the browser with real-time collaboration."
+    screenshots:
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
     pros:
       - "Real-time collaboration"
       - "Browser-based, no downloads"
@@ -49,6 +57,10 @@ apps:
     url: "https://code.visualstudio.com"
     description: "Lightweight but powerful source code editor"
     overview: "VS Code is Microsoft's free, open-source code editor with excellent extension support, integrated terminal, and debugging capabilities."
+    screenshots:
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
     pros:
       - "Extensive extension marketplace"
       - "Built-in Git integration"
@@ -64,6 +76,10 @@ apps:
     url: "https://linear.app"
     description: "Issue tracking built for modern software teams"
     overview: "Linear streamlines issue tracking and project management with a focus on speed and simplicity. Built specifically for software development teams."
+    screenshots:
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
     pros:
       - "Lightning-fast performance"
       - "Beautiful, intuitive interface"
@@ -79,6 +95,10 @@ apps:
     url: "https://framer.com"
     description: "Interactive design and prototyping tool"
     overview: "Framer combines design and code to create interactive prototypes and production-ready websites with advanced animations and interactions."
+    screenshots:
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
     pros:
       - "Advanced animation capabilities"
       - "Code components support"
@@ -94,6 +114,10 @@ apps:
     url: "https://vercel.com"
     description: "Platform for frontend frameworks and static sites"
     overview: "Vercel provides the best developer experience with a focus on frontend frameworks like Next.js, with instant deployments and global CDN."
+    screenshots:
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
+      - "/placeholder.svg?height=400&width=600"
     pros:
       - "Zero-config deployments"
       - "Excellent Next.js integration"

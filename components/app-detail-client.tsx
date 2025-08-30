@@ -1,13 +1,17 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import ShaderBackground from "@/components/shader-background"
 import Breadcrumb from "@/components/breadcrumb"
 import SearchModal from "@/components/search-modal"
+import ProfileSheet from "@/components/profile-sheet"
+import DirectoryHeader from "@/components/directory-header"
 import type { App, Category } from "@/lib/types"
 
 interface AppDetailClientProps {
@@ -22,6 +26,18 @@ export default function AppDetailClient({ app, category, allApps = [], allCatego
   const [imageError, setImageError] = useState(false)
   const [isVisiting, setIsVisiting] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault()
+        setIsSearchOpen(true)
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [])
 
   const handleBack = () => {
     router.back()
@@ -43,55 +59,7 @@ export default function AppDetailClient({ app, category, allApps = [], allCatego
 
   return (
     <ShaderBackground>
-      {/* Header */}
-      <header className="relative z-20 flex items-center justify-between p-6">
-        <div className="flex items-center gap-4">
-          <button
-            onClick={handleBack}
-            className="text-white/80 hover:text-white transition-all duration-200 p-2 -ml-2 rounded-full hover:bg-white/10 group"
-            aria-label="Go back"
-          >
-            <svg
-              className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <h1 className="text-white text-xl font-medium tracking-tight">catalyst</h1>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setIsSearchOpen(true)}
-            className="px-6 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white font-normal text-xs transition-all duration-300 hover:bg-white/20 cursor-pointer h-8 flex items-center gap-2"
-          >
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-            Search
-            <kbd className="ml-2 px-1.5 py-0.5 rounded bg-white/20 text-white/80 text-xs flex items-center gap-1">
-              <span>⌘</span>
-              <span>K</span>
-            </kbd>
-          </button>
-
-          <Button
-            onClick={handleVisitApp}
-            disabled={isVisiting}
-            className="bg-white text-black hover:bg-white/90 text-xs font-normal px-6 py-2 h-8 transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100"
-          >
-            {isVisiting ? "Opening..." : "Visit App"}
-          </Button>
-        </div>
-      </header>
+      <DirectoryHeader apps={allApps} categories={allCategories} showBreadcrumb={false} />
 
       {/* Main Content */}
       <main className="relative z-20 p-6 pt-0">
@@ -200,26 +168,43 @@ export default function AppDetailClient({ app, category, allApps = [], allCatego
             </Card>
           </div>
 
-          {/* Screenshots */}
-          <Card className="p-8 bg-white/5 backdrop-blur-sm border-white/10 mb-8 hover:bg-white/[0.07] transition-colors">
-            <h2 className="text-white text-xl font-medium mb-6">Screenshots</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[1, 2, 3].map((index) => (
-                <div
-                  key={index}
-                  className="aspect-video bg-white/10 rounded-lg flex items-center justify-center group hover:bg-white/15 transition-colors"
-                >
-                  <Image
-                    src={`/abstract-geometric-shapes.png?key=jnse7&height=200&width=300&query=${app.name} screenshot ${index}`}
-                    alt={`${app.name} screenshot ${index}`}
-                    width={300}
-                    height={200}
-                    className="rounded-lg group-hover:scale-105 transition-transform"
-                  />
-                </div>
-              ))}
-            </div>
-          </Card>
+          {app.screenshots && app.screenshots.length > 0 && (
+            <Card className="p-8 bg-white/5 backdrop-blur-sm border-white/10 mb-8 hover:bg-white/[0.07] transition-colors">
+              <h2 className="text-white text-xl font-medium mb-6">Screenshots</h2>
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {app.screenshots.map((screenshot, index) => (
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <div className="aspect-video bg-white/10 rounded-lg overflow-hidden cursor-pointer group hover:bg-white/15 transition-colors">
+                            <Image
+                              src={screenshot || "/placeholder.svg"}
+                              alt={`${app.name} screenshot ${index + 1}`}
+                              width={400}
+                              height={300}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                            />
+                          </div>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-4xl bg-black/90 border-white/20">
+                          <Image
+                            src={screenshot || "/placeholder.svg"}
+                            alt={`${app.name} screenshot ${index + 1}`}
+                            width={800}
+                            height={600}
+                            className="w-full h-auto rounded-lg"
+                          />
+                        </DialogContent>
+                      </Dialog>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="bg-white/10 border-white/20 text-white hover:bg-white/20" />
+                <CarouselNext className="bg-white/10 border-white/20 text-white hover:bg-white/20" />
+              </Carousel>
+            </Card>
+          )}
 
           {/* Bottom CTA */}
           <Card className="p-8 bg-white/5 backdrop-blur-sm border-white/10 text-center hover:bg-white/[0.07] transition-colors">
@@ -243,6 +228,8 @@ export default function AppDetailClient({ app, category, allApps = [], allCatego
         apps={allApps}
         categories={allCategories}
       />
+
+      <ProfileSheet />
     </ShaderBackground>
   )
 }

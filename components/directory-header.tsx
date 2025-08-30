@@ -1,15 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import SearchModal from "./search-modal"
 import type { App, Category } from "@/lib/types"
 
 interface DirectoryHeaderProps {
   selectedCategory?: string
-  onBackToCategories: () => void
+  onBackToCategories?: () => void
   categoryName?: string
   apps?: App[]
   categories?: Category[]
+  showBreadcrumb?: boolean
 }
 
 export default function DirectoryHeader({
@@ -18,8 +20,10 @@ export default function DirectoryHeader({
   categoryName,
   apps = [],
   categories = [],
+  showBreadcrumb = true,
 }: DirectoryHeaderProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const router = useRouter()
 
   const handleSearchClick = () => {
     setIsSearchOpen(true)
@@ -29,17 +33,42 @@ export default function DirectoryHeader({
     setIsSearchOpen(false)
   }
 
+  const handleCategoriesClick = () => {
+    if (onBackToCategories) {
+      onBackToCategories()
+    } else {
+      router.push("/")
+    }
+  }
+
+  const handleLogoClick = () => {
+    window.location.assign("/")
+  }
+
+  const handleSubmitToolClick = () => {
+    router.push("/submit-tool")
+  }
+
+  const handleAboutClick = () => {
+    router.push("/about")
+  }
+
   return (
     <>
-      <header className="relative z-20 flex items-center justify-between p-6">
-        {/* Logo */}
-        <div className="flex items-center gap-4">
-          <h1 className="text-white text-xl font-medium tracking-tight">catalyst</h1>
-          {selectedCategory && (
+      <header className="relative z-20 flex items-center justify-between p-6 w-full">
+        {/* Logo and Breadcrumb */}
+        <div className="flex items-center gap-4 flex-1">
+          <button
+            onClick={handleLogoClick}
+            className="text-white text-xl font-medium tracking-tight hover:text-white/80 transition-colors"
+          >
+            catalyst
+          </button>
+          {showBreadcrumb && selectedCategory && (
             <>
               <span className="text-white/40">/</span>
               <button
-                onClick={onBackToCategories}
+                onClick={handleCategoriesClick}
                 className="text-white/80 hover:text-white text-sm font-light transition-colors"
               >
                 {categoryName}
@@ -48,30 +77,29 @@ export default function DirectoryHeader({
           )}
         </div>
 
-        {/* Navigation */}
-        <nav className="flex items-center space-x-2">
+        <nav className="flex items-center space-x-2 flex-1 justify-center">
           <button
-            onClick={onBackToCategories}
+            onClick={handleCategoriesClick}
             className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
           >
             Categories
           </button>
-          <a
-            href="#"
+          <button
+            onClick={handleSubmitToolClick}
             className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
           >
             Submit Tool
-          </a>
-          <a
-            href="#"
+          </button>
+          <button
+            onClick={handleAboutClick}
             className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
           >
             About
-          </a>
+          </button>
         </nav>
 
         {/* Search Button */}
-        <div className="flex items-center">
+        <div className="flex items-center flex-1 justify-end">
           <button
             data-search-trigger
             onClick={handleSearchClick}

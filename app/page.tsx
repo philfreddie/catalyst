@@ -5,6 +5,8 @@ import CategoryGrid from "@/components/category-grid"
 import AppGrid from "@/components/app-grid"
 import ShaderBackground from "@/components/shader-background"
 import LoadingSpinner from "@/components/loading-spinner"
+import DirectoryHeader from "@/components/directory-header"
+import ProfileSheet from "@/components/profile-sheet"
 import type { Category, App } from "@/lib/types"
 
 export default function CatalystDirectory() {
@@ -84,46 +86,9 @@ export default function CatalystDirectory() {
   if (loading) {
     return (
       <ShaderBackground>
-        <header className="relative z-20 flex items-center justify-between p-6">
-          <div className="flex items-center gap-4">
-            <h1 className="text-white text-xl font-medium tracking-tight">catalyst</h1>
-          </div>
-          <nav className="flex items-center space-x-2">
-            <button className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200">
-              Categories
-            </button>
-            <a
-              href="#"
-              className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
-            >
-              Submit Tool
-            </a>
-            <a
-              href="#"
-              className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
-            >
-              About
-            </a>
-          </nav>
-          <div className="flex items-center">
-            <div className="px-6 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white font-normal text-xs h-8 flex items-center gap-2 opacity-50">
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              Search
-              <kbd className="ml-2 px-1.5 py-0.5 rounded bg-white/20 text-white/80 text-xs flex items-center gap-1">
-                <span>⌘</span>
-                <span>K</span>
-              </kbd>
-            </div>
-          </div>
-        </header>
+        <DirectoryHeader apps={[]} categories={[]} showBreadcrumb={false} />
         <LoadingSpinner />
+        <ProfileSheet />
       </ShaderBackground>
     )
   }
@@ -131,45 +96,7 @@ export default function CatalystDirectory() {
   if (error) {
     return (
       <ShaderBackground>
-        <header className="relative z-20 flex items-center justify-between p-6">
-          <div className="flex items-center gap-4">
-            <h1 className="text-white text-xl font-medium tracking-tight">catalyst</h1>
-          </div>
-          <nav className="flex items-center space-x-2">
-            <button className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200">
-              Categories
-            </button>
-            <a
-              href="#"
-              className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
-            >
-              Submit Tool
-            </a>
-            <a
-              href="#"
-              className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
-            >
-              About
-            </a>
-          </nav>
-          <div className="flex items-center">
-            <div className="px-6 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white font-normal text-xs h-8 flex items-center gap-2 opacity-50">
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              Search
-              <kbd className="ml-2 px-1.5 py-0.5 rounded bg-white/20 text-white/80 text-xs flex items-center gap-1">
-                <span>⌘</span>
-                <span>K</span>
-              </kbd>
-            </div>
-          </div>
-        </header>
+        <DirectoryHeader apps={apps} categories={categories} showBreadcrumb={false} />
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="text-white text-lg mb-2">Oops! Something went wrong</div>
@@ -182,51 +109,22 @@ export default function CatalystDirectory() {
             </button>
           </div>
         </div>
+        <ProfileSheet />
       </ShaderBackground>
     )
   }
 
   return (
     <ShaderBackground>
-      <header className="relative z-20 flex items-center justify-between p-6">
-        <div className="flex items-center gap-4">
-          <h1 className="text-white text-xl font-medium tracking-tight">catalyst</h1>
-        </div>
-        <nav className="flex items-center space-x-2">
-          <button className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200">
-            Categories
-          </button>
-          <a
-            href="#"
-            className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
-          >
-            Submit Tool
-          </a>
-          <a
-            href="#"
-            className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
-          >
-            About
-          </a>
-        </nav>
-        <div className="flex items-center">
-          <div className="px-6 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white font-normal text-xs h-8 flex items-center gap-2 opacity-50">
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-            Search
-            <kbd className="ml-2 px-1.5 py-0.5 rounded bg-white/20 text-white/80 text-xs flex items-center gap-1">
-              <span>⌘</span>
-              <span>K</span>
-            </kbd>
-          </div>
-        </div>
-      </header>
+      <DirectoryHeader
+        selectedCategory={selectedCategory}
+        onBackToCategories={handleBackToCategories}
+        categoryName={selectedCategoryData?.name}
+        apps={apps}
+        categories={categories}
+        showBreadcrumb={selectedCategory !== null}
+      />
+
       <main className="relative z-20 p-6 pt-0">
         <div className="max-w-7xl mx-auto">
           {!selectedCategory ? (
@@ -269,6 +167,8 @@ export default function CatalystDirectory() {
           )}
         </div>
       </main>
+
+      <ProfileSheet />
     </ShaderBackground>
   )
 }
