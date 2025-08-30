@@ -1,0 +1,103 @@
+categories:
+  - id: "productivity"
+    name: "Productivity"
+    description: "Tools to boost your workflow and get things done"
+    
+  - id: "design"
+    name: "Design"
+    description: "Creative tools for designers and visual creators"
+    
+  - id: "developer"
+    name: "Developer Tools"
+    description: "Essential tools for developers and engineers"
+
+apps:
+  - id: "notion"
+    name: "Notion"
+    category: "productivity"
+    icon: "https://www.notion.so/images/favicon.ico"
+    url: "https://notion.so"
+    description: "All-in-one workspace for notes, docs, and collaboration"
+    overview: "Notion combines note-taking, task management, databases, and team collaboration in one powerful platform. Perfect for personal organization or team projects."
+    pros:
+      - "Highly customizable workspace"
+      - "Great for team collaboration"
+      - "Powerful database features"
+    cons:
+      - "Can be overwhelming for beginners"
+      - "Performance issues with large databases"
+      
+  - id: "figma"
+    name: "Figma"
+    category: "design"
+    icon: "https://static.figma.com/app/icon/1/favicon.ico"
+    url: "https://figma.com"
+    description: "Collaborative interface design tool"
+    overview: "Figma is the leading collaborative design platform for creating user interfaces, prototypes, and design systems. Works entirely in the browser with real-time collaboration."
+    pros:
+      - "Real-time collaboration"
+      - "Browser-based, no downloads"
+      - "Excellent prototyping features"
+    cons:
+      - "Requires internet connection"
+      - "Limited offline capabilities"
+      
+  - id: "vscode"
+    name: "Visual Studio Code"
+    category: "developer"
+    icon: "https://code.visualstudio.com/favicon.ico"
+    url: "https://code.visualstudio.com"
+    description: "Lightweight but powerful source code editor"
+    overview: "VS Code is Microsoft's free, open-source code editor with excellent extension support, integrated terminal, and debugging capabilities."
+    pros:
+      - "Extensive extension marketplace"
+      - "Built-in Git integration"
+      - "Excellent debugging tools"
+    cons:
+      - "Can become resource-heavy with many extensions"
+      - "Overwhelming number of features for beginners"
+      
+  - id: "linear"
+    name: "Linear"
+    category: "productivity"
+    icon: "https://linear.app/favicon.ico"
+    url: "https://linear.app"
+    description: "Issue tracking built for modern software teams"
+    overview: "Linear streamlines issue tracking and project management with a focus on speed and simplicity. Built specifically for software development teams."
+    pros:
+      - "Lightning-fast performance"
+      - "Beautiful, intuitive interface"
+      - "Great keyboard shortcuts"
+    cons:
+      - "Limited customization options"
+      - "Focused mainly on software teams"
+      
+  - id: "framer"
+    name: "Framer"
+    category: "design"
+    icon: "https://www.framer.com/favicon.ico"
+    url: "https://framer.com"
+    description: "Interactive design and prototyping tool"
+    overview: "Framer combines design and code to create interactive prototypes and production-ready websites with advanced animations and interactions."
+    pros:
+      - "Advanced animation capabilities"
+      - "Code components support"
+      - "Publish directly to web"
+    cons:
+      - "Steep learning curve"
+      - "More expensive than alternatives"
+      
+  - id: "vercel"
+    name: "Vercel"
+    category: "developer"
+    icon: "https://vercel.com/favicon.ico"
+    url: "https://vercel.com"
+    description: "Platform for frontend frameworks and static sites"
+    overview: "Vercel provides the best developer experience with a focus on frontend frameworks like Next.js, with instant deployments and global CDN."
+    pros:
+      - "Zero-config deployments"
+      - "Excellent Next.js integration"
+      - "Global edge network"
+    cons:
+      - "Can get expensive at scale"
+      - "Limited backend capabilities"
